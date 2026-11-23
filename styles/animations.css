@@ -1,0 +1,182 @@
+/* ═══════════════════════════════════════════════════════
+   OtakuVault — Animations & Keyframes
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Shimmer (Skeleton Loader) ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Fade In Up ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Fade In ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Scale In ── */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Slide In from Right ── */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Slide In from Left ── */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Slide In from Top ── */
+@keyframes slideInTop {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Cart Badge Bounce ── */
+@keyframes cartBounce {
+  0%, 100% { transform: scale(1); }
+  25%       { transform: scale(1.4); }
+  50%       { transform: scale(0.9); }
+  75%       { transform: scale(1.15); }
+}
+
+/* ── Heart Pop ── */
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* ── Sale Badge Pulse ── */
+@keyframes saleGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(255,107,53,0); }
+}
+
+/* ── New Badge Shimmer ── */
+@keyframes newShimmer {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+/* ── Gradient Shift (Hero) ── */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Float ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* ── Spin ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Ripple ── */
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ── Toast Progress ── */
+@keyframes toastProgress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+/* ── Flame Flicker ── */
+@keyframes flameFlicker {
+  0%, 100% { transform: rotate(-3deg) scale(1); }
+  50%       { transform: rotate(3deg) scale(1.15); }
+}
+
+/* ── Dot Pulse (loading) ── */
+@keyframes dotPulse {
+  0%, 80%, 100% { transform: scale(0); opacity: 0; }
+  40%           { transform: scale(1); opacity: 1; }
+}
+
+/* ── Live Badge Pulse ── */
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+/* ── Urgency Tick ── */
+@keyframes urgencyTick {
+  0%, 100% { transform: scale(1); color: var(--warning); }
+  50%       { transform: scale(1.05); color: var(--accent-orange); }
+}
+
+/* ─────────────────────────────────────────────────────── */
+/* Application Classes                                     */
+/* ─────────────────────────────────────────────────────── */
+
+.animate-fadeInUp    { animation: fadeInUp 0.5s ease forwards; }
+.animate-fadeIn      { animation: fadeIn 0.4s ease forwards; }
+.animate-scaleIn     { animation: scaleIn 0.3s ease forwards; }
+.animate-slideRight  { animation: slideInRight 0.4s ease forwards; }
+.animate-slideLeft   { animation: slideInLeft 0.4s ease forwards; }
+.animate-slideTop    { animation: slideInTop 0.4s ease forwards; }
+.animate-float       { animation: float 3s ease-in-out infinite; }
+.animate-spin        { animation: spin 1s linear infinite; }
+.animate-livePulse   { animation: livePulse 1.5s ease infinite; }
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    #EBEBEB 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* Sale Badge Animation */
+.badge-sale { animation: saleGlow 1.5s ease infinite; }
+
+/* New Badge Animation */
+.badge-new-anim { animation: newShimmer 2s ease infinite; }
+
+/* Cart Bounce */
+.cart-bounce { animation: cartBounce 0.4s ease; }
+
+/* Hero Gradient Animation */
+.hero-gradient-anim {
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* Flame Icon */
+.icon-flame { animation: flameFlicker 0.8s ease infinite; display: inline-block; }
+
+/* Ripple Effect */
+.ripple-container { position: relative; overflow: hidden; }
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 10px; height: 10px;
+  background: rgba(255,255,255,0.4);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OtakuVault — India's premium anime merchandise store. Shop action figures, streetwear, LED lamps, keychains and more from 12+ franchises. Free shipping above ₹1,500.">
+  <meta property="og:title" content="OtakuVault — Your Anime Collection Starts Here">
+  <meta property="og:description" content="Premium anime merch, figures, streetwear & collectibles. Trusted by 10,000+ otakus across India.">
+  <meta property="og:type" content="website">
+  <title>OtakuVault — Your Anime Collection Starts Here</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/animations.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <style>
+    /* ── Home-specific styles ── */
+    .stats-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      background: var(--text-primary);
+      padding: 14px var(--space-xl);
+      flex-wrap: wrap;
+    }
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,0.9);
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+    .stat-item .num {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: #FFD166;
+    }
+
+    /* New Drops Grid */
+    .new-drops-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+    @media (max-width: 768px) { .new-drops-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 400px) { .new-drops-grid { grid-template-columns: 1fr; } }
+
+    /* Newsletter */
+    .newsletter-section {
+      background: var(--gradient-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3xl) var(--space-2xl);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--space-2xl);
+    }
+    @media (max-width: 768px) {
+      .newsletter-section { grid-template-columns: 1fr; text-align: center; }
+      .newsletter-section .newsletter-form { max-width: 100%; }
+    }
+
+    /* Franchise Circles */
+    .franchise-circles-section { overflow: hidden; }
+
+    /* Features Section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+    }
+    .feature-card {
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-color);
+      transition: all var(--transition-base);
+    }
+    .feature-card:hover { border-color: var(--accent-red); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+    .feature-icon { font-size: 2.5rem; margin-bottom: var(--space-md); display: block; }
+    .feature-title { font-family: var(--font-heading); font-weight: 700; margin-bottom: var(--space-xs); font-size: var(--text-md); }
+    .feature-desc { font-size: var(--text-sm); color: var(--text-secondary); }
+    @media (max-width: 768px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 400px) { .features-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="page-wrapper">
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__logo" aria-label="OtakuVault Home">
+      <div class="navbar__logo-icon" aria-hidden="true">⚡</div>
+      <span class="navbar__logo-text">OtakuVault</span>
+    </a>
+    <nav class="navbar__links" aria-label="Site pages">
+      <a href="index.html"     class="navbar__link active">Home</a>
+      <a href="shop.html"      class="navbar__link">Shop</a>
+      <a href="new-drops.html" class="navbar__link">New Drops 🔥</a>
+      <a href="sale.html"      class="navbar__link">Sale</a>
+      <a href="franchise.html" class="navbar__link">Franchise</a>
+      <a href="about.html"     class="navbar__link">About</a>
+    </nav>
+    <div class="navbar__search" role="search">
+      <input id="navbar-search" class="navbar__search-input" type="search" placeholder="Search anime, franchise, product..." autocomplete="off" aria-label="Search products">
+      <svg class="navbar__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <div id="search-dropdown" class="search-dropdown"></div>
+    </div>
+    <div class="navbar__actions">
+      <a href="wishlist.html" class="nav-icon-btn" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="nav-badge" data-wishlist-badge style="display:none">0</span>
+      </a>
+      <a href="cart.html" class="nav-icon-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="nav-badge" data-cart-badge style="display:none">0</span>
+      </a>
+      <a href="account.html" class="nav-icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu__overlay" id="mobile-menu-overlay"></div>
+<aside class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mobile-menu__header">
+    <div class="navbar__logo"><div class="navbar__logo-icon">⚡</div><span class="navbar__logo-text">OtakuVault</span></div>
+    <button class="mobile-menu__close" id="mobile-menu-close" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <nav class="mobile-menu__nav">
+    <a href="index.html"     class="mobile-menu__link">🏠 Home</a>
+    <a href="shop.html"      class="mobile-menu__link">🛍️ Shop All</a>
+    <a href="new-drops.html" class="mobile-menu__link">🔥 New Drops</a>
+    <a href="sale.html"      class="mobile-menu__link">💥 Sale & Offers</a>
+    <a href="franchise.html" class="mobile-menu__link">⭐ Franchises</a>
+    <a href="wishlist.html"  class="mobile-menu__link">❤️ Wishlist</a>
+    <a href="tracking.html"  class="mobile-menu__link">📦 Track Order</a>
+    <a href="contact.html"   class="mobile-menu__link">💬 Contact Us</a>
+  </nav>
+</aside>
+
+<main class="page-main">
+  <!-- ════════ HERO ════════ -->
+  <section class="hero" aria-label="Hero banner">
+    <div class="hero__bg hero-gradient-anim"></div>
+    <div class="hero__bg-pattern"></div>
+    <div class="hero__image-wrap" aria-hidden="true">
+      <img src="assets/images/hero_banner.png" alt="" class="hero__image" loading="eager">
+    </div>
+    <div class="container" style="position:relative;z-index:2;width:100%">
+      <div class="hero__content animate-fadeInUp">
+        <div class="hero__eyebrow">
+          <span style="color:#FFD166">⚡</span>
+          India's Premium Anime Store — 10,000+ Otakus Trust Us
+        </div>
+        <h1 class="hero__title">
+          Unleash Your<br>
+          <span class="highlight">Inner Otaku</span> 🔥
+        </h1>
+        <p class="hero__subtitle">Premium Anime Merch · Figures · Streetwear · Collectibles<br>Delivered across India with love.</p>
+        <div class="hero__actions">
+          <a href="shop.html" class="hero__btn-primary" id="hero-shop-btn">
+            Shop Now
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </a>
+          <a href="new-drops.html" class="hero__btn-secondary" id="hero-drops-btn">
+            New Drops <span class="icon-flame">🔥</span>
+          </a>
+        </div>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <div class="hero__stat-num">10K+</div>
+            <div class="hero__stat-label">Happy Otakus</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-num">200+</div>
+            <div class="hero__stat-label">Products</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-num">500+</div>
+            <div class="hero__stat-label">Cities</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-num">4.8★</div>
+            <div class="hero__stat-label">Avg Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TRUST BAR ════════ -->
+  <div class="trust-bar" role="region" aria-label="Trust indicators">
+    <div class="trust-item"><span class="trust-icon">🚚</span>Free Shipping above ₹1,500</div>
+    <div class="trust-item"><span class="trust-icon">✅</span>Authentic Products</div>
+    <div class="trust-item"><span class="trust-icon">🔄</span>7-Day Easy Returns</div>
+    <div class="trust-item"><span class="trust-icon">💳</span>Secure Payments</div>
+    <div class="trust-item"><span class="trust-icon">📞</span>24/7 Support</div>
+  </div>
+
+  <!-- ════════ STATS BAR ════════ -->
+  <div class="stats-bar" role="region" aria-label="Store statistics">
+    <div class="stat-item">Orders Delivered: <span class="num">25,000+</span></div>
+    <div class="stat-item">5-Star Reviews: <span class="num">8,400+</span></div>
+    <div class="stat-item">Franchises: <span class="num">12+</span></div>
+    <div class="stat-item">Products: <span class="num">200+</span></div>
+  </div>
+
+  <!-- ════════ CATEGORIES BENTO GRID ════════ -->
+  <section class="section" aria-labelledby="categories-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" id="categories-heading"><span class="emoji">🗃️</span>Shop by Category</h2>
+          <p class="section-subtitle">Find exactly what your inner otaku craves</p>
+        </div>
+        <a href="shop.html" class="view-all-link">View All</a>
+      </div>
+      <div class="bento-grid reveal">
+        <a href="shop.html?category=apparel" class="bento-item" aria-label="Shop Streetwear">
+          <img src="assets/images/category_apparel.png" alt="Anime streetwear" class="bento-img" loading="lazy">
+          <div class="bento-overlay">
+            <div class="bento-label">Streetwear<br>& Apparel</div>
+            <div class="bento-count">Oversized tees, hoodies & more</div>
+          </div>
+          <div class="bento-arrow">→</div>
+        </a>
+        <a href="shop.html?category=figures" class="bento-item" aria-label="Shop Action Figures">
+          <img src="assets/images/category_figures.png" alt="Anime action figures" class="bento-img" loading="lazy">
+          <div class="bento-overlay">
+            <div class="bento-label">Action Figures<br>& Collectibles</div>
+            <div class="bento-count">Premium collector pieces</div>
+          </div>
+          <div class="bento-arrow">→</div>
+        </a>
+        <a href="shop.html?category=lamps" class="bento-item" aria-label="Shop LED Lamps">
+          <img src="assets/images/category_lamps.png" alt="Anime LED lamps" class="bento-img" loading="lazy">
+          <div class="bento-overlay">
+            <div class="bento-label">LED Lamps<br>& Lights</div>
+            <div class="bento-count">Light up your battlestation</div>
+          </div>
+          <div class="bento-arrow">→</div>
+        </a>
+        <a href="shop.html?category=accessories" class="bento-item" aria-label="Shop Accessories">
+          <img src="assets/images/category_accessories.png" alt="Anime accessories" class="bento-img" loading="lazy">
+          <div class="bento-overlay">
+            <div class="bento-label">Keychains<br>& Accessories</div>
+            <div class="bento-count">Small but mighty</div>
+          </div>
+          <div class="bento-arrow">→</div>
+        </a>
+        <a href="shop.html?category=cosplay" class="bento-item" aria-label="Shop Cosplay">
+          <img src="assets/images/category_cosplay.png" alt="Cosplay and props" class="bento-img" loading="lazy">
+          <div class="bento-overlay">
+            <div class="bento-label">Cosplay<br>& Props</div>
+            <div class="bento-count">Live the character</div>
+          </div>
+          <div class="bento-arrow">→</div>
+        </a>
+        <a href="shop.html?category=wallart" class="bento-item" aria-label="Shop Wall Art">
+          <img src="assets/images/category_wallart.png" alt="Anime wall art" class="bento-img" loading="lazy">
+          <div class="bento-overlay">
+            <div class="bento-label">Wall Art<br>& Posters</div>
+            <div class="bento-count">Transform your space</div>
+          </div>
+          <div class="bento-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TRENDING NOW ════════ -->
+  <section class="section section-alt" aria-labelledby="trending-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" id="trending-heading"><span class="icon-flame">🔥</span>Trending Now</h2>
+          <p class="section-subtitle">What 10,000+ otakus are obsessing over this week</p>
+        </div>
+        <a href="shop.html?sort=trending" class="view-all-link">View All</a>
+      </div>
+      <div class="carousel-wrap">
+        <button class="carousel-btn carousel-btn-prev" id="trending-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-scroll" id="trending-carousel" role="list" aria-label="Trending products">
+          <!-- Populated by home.js -->
+        </div>
+        <button class="carousel-btn carousel-btn-next" id="trending-next" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ SHOP BY FRANCHISE ════════ -->
+  <section class="section" aria-labelledby="franchise-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" id="franchise-heading"><span class="emoji">⭐</span>Shop by Franchise</h2>
+          <p class="section-subtitle">Your favourite anime universes, all in one place</p>
+        </div>
+      </div>
+      <div class="franchise-scroll" id="franchise-logos" role="list" aria-label="Anime franchises">
+        <!-- Populated by home.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ NEW DROPS ════════ -->
+  <section class="section section-alt" aria-labelledby="new-drops-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" id="new-drops-heading"><span class="emoji">✨</span>New Drops</h2>
+          <p class="section-subtitle">Fresh arrivals — be the first to grab them!</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+          <!-- Countdown -->
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:13px;font-weight:600;color:var(--text-secondary)">Next drop in:</span>
+            <div class="countdown">
+              <div class="countdown-unit"><span class="countdown-num" id="cd-days">00</span><span class="countdown-label">Days</span></div>
+              <span class="countdown-sep">:</span>
+              <div class="countdown-unit"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-label">Hrs</span></div>
+              <span class="countdown-sep">:</span>
+              <div class="countdown-unit"><span class="countdown-num" id="cd-mins">00</span><span class="countdown-label">Min</span></div>
+              <span class="countdown-sep">:</span>
+              <div class="countdown-unit"><span class="countdown-num" id="cd-secs">00</span><span class="countdown-label">Sec</span></div>
+            </div>
+          </div>
+          <a href="new-drops.html" class="view-all-link">View All</a>
+        </div>
+      </div>
+      <div class="new-drops-grid" id="new-drops-grid" role="list" aria-label="New products">
+        <!-- Populated by home.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FEATURES ════════ -->
+  <section class="section" aria-labelledby="features-heading">
+    <div class="container">
+      <h2 class="section-title" id="features-heading" style="text-align:center;justify-content:center;margin-bottom:var(--space-xl)">Why Otakus Choose Us</h2>
+      <div class="features-grid">
+        <div class="feature-card reveal reveal-delay-1">
+          <span class="feature-icon">🚚</span>
+          <h3 class="feature-title">Fast Delivery</h3>
+          <p class="feature-desc">2-5 day shipping across India. Free above ₹1,500. COD available.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <span class="feature-icon">✅</span>
+          <h3 class="feature-title">Authentic Quality</h3>
+          <p class="feature-desc">Premium products, quality-checked. What you see is what you get.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <span class="feature-icon">🔄</span>
+          <h3 class="feature-title">Easy Returns</h3>
+          <p class="feature-desc">7-day hassle-free return policy. No questions asked.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <span class="feature-icon">💳</span>
+          <h3 class="feature-title">Secure Payment</h3>
+          <p class="feature-desc">UPI, cards, net banking, COD. Powered by Razorpay encryption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TESTIMONIALS ════════ -->
+  <section class="section section-alt" aria-labelledby="testimonials-heading">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" id="testimonials-heading"><span class="emoji">❤️</span>What Otakus Say</h2>
+          <p class="section-subtitle">Trusted by 10,000+ anime fans across India</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="text-align:right">
+            <div style="font-family:var(--font-heading);font-size:2rem;font-weight:900;color:var(--accent-red)">4.8★</div>
+            <div style="font-size:12px;color:var(--text-secondary)">8,400+ reviews</div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-wrap">
+        <button class="carousel-btn carousel-btn-prev" id="testimonials-prev" aria-label="Previous testimonial">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-scroll" id="testimonials-carousel" role="list" aria-label="Customer testimonials"></div>
+        <button class="carousel-btn carousel-btn-next" id="testimonials-next" aria-label="Next testimonial">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ RECENTLY VIEWED ════════ -->
+  <section class="section" id="recently-viewed-section" aria-labelledby="recently-heading" style="display:none">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title" id="recently-heading"><span class="emoji">🕐</span>Recently Viewed</h2>
+          <p class="section-subtitle">Pick up where you left off</p>
+        </div>
+        <a href="shop.html" class="view-all-link">Explore More</a>
+      </div>
+      <div class="carousel-wrap">
+        <button class="carousel-btn carousel-btn-prev" id="recent-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-scroll" id="recently-viewed-carousel" role="list" aria-label="Recently viewed products"></div>
+        <button class="carousel-btn carousel-btn-next" id="recent-next" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ NEWSLETTER ════════ -->
+  <section class="section" aria-labelledby="newsletter-heading">
+    <div class="container">
+      <div class="newsletter-section">
+        <div>
+          <h2 class="section-title" id="newsletter-heading" style="margin-bottom:8px"><span class="emoji">📧</span>Join the Otaku Club</h2>
+          <p style="color:var(--text-secondary);margin-bottom:var(--space-lg);max-width:440px">Get 10% off your first order, early access to new drops, exclusive deals and anime news delivered to your inbox.</p>
+          <form class="newsletter-form" id="newsletter-form" novalidate aria-label="Newsletter signup">
+            <input type="email" class="form-input" placeholder="your@email.com" required aria-label="Email address">
+            <button type="submit" class="btn btn-primary">Subscribe 🚀</button>
+          </form>
+          <p style="font-size:12px;color:var(--text-tertiary);margin-top:10px">No spam. Unsubscribe anytime. We value your inbox as much as our favourite anime.</p>
+        </div>
+        <div style="text-align:center" aria-hidden="true">
+          <img src="assets/images/newsletter_character.png" alt="" style="width:220px;object-fit:contain;animation:float 3s ease-in-out infinite" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ════════ FOOTER ════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="footer__brand-logo">Otaku<span>Vault</span></div>
+        <p class="footer__brand-desc">Your one-stop destination for premium anime merchandise in India. Figures, streetwear, collectibles and more — curated for true otakus.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="footer__social-link" aria-label="Twitter/X"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" class="footer__social-link" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="#" class="footer__social-link" aria-label="Discord"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.085.118 18.11.137 18.131a19.942 19.942 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer__col-title">Shop</h3>
+        <ul class="footer__links">
+          <li><a href="shop.html" class="footer__link">All Products</a></li>
+          <li><a href="new-drops.html" class="footer__link">New Drops 🔥</a></li>
+          <li><a href="sale.html" class="footer__link">Sale & Offers</a></li>
+          <li><a href="shop.html?category=figures" class="footer__link">Action Figures</a></li>
+          <li><a href="shop.html?category=apparel" class="footer__link">Streetwear</a></li>
+          <li><a href="shop.html?category=accessories" class="footer__link">Accessories</a></li>
+          <li><a href="franchise.html" class="footer__link">Franchises</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__col-title">Support</h3>
+        <ul class="footer__links">
+          <li><a href="contact.html" class="footer__link">Contact Us</a></li>
+          <li><a href="faq.html" class="footer__link">FAQ</a></li>
+          <li><a href="tracking.html" class="footer__link">Track Order</a></li>
+          <li><a href="account.html" class="footer__link">My Account</a></li>
+          <li><a href="wishlist.html" class="footer__link">Wishlist</a></li>
+          <li><a href="about.html" class="footer__link">About Us</a></li>
+          <li><a href="#" class="footer__link">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__col-title">We Accept</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="footer__payment-badge">UPI</span>
+            <span class="footer__payment-badge">COD</span>
+            <span class="footer__payment-badge">Visa</span>
+            <span class="footer__payment-badge">MC</span>
+            <span class="footer__payment-badge">RuPay</span>
+            <span class="footer__payment-badge">EMI</span>
+          </div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:8px">🔒 Secured by Razorpay</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.65)">📞 +91 98765 43210</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.65)">✉️ help@otakuvault.in</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copyright">© 2026 OtakuVault. Made with ❤️ for Otakus in India.</p>
+      <div class="footer__payment">
+        <span class="footer__payment-badge" style="font-size:10px">GST Registered</span>
+        <span class="footer__payment-badge" style="font-size:10px">100% Secure</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<a href="https://wa.me/919876543210" class="whatsapp-float" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<nav class="bottom-nav" aria-label="Mobile bottom navigation">
+  <div class="bottom-nav__inner">
+    <a href="index.html" class="bottom-nav__item active" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></a>
+    <a href="shop.html" class="bottom-nav__item" aria-label="Shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span>Shop</span></a>
+    <a href="cart.html" class="bottom-nav__item" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg><span>Cart</span><span class="nav-badge" data-cart-badge style="display:none;top:0;right:20%">0</span></a>
+    <a href="wishlist.html" class="bottom-nav__item" aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Wishlist</span></a>
+    <a href="account.html" class="bottom-nav__item" aria-label="Account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Account</span></a>
+  </div>
+</nav>
+
+<script src="js/data.js"></script>
+<script src="js/core.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
